@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyachao.movie.dao.MovieMapper">
+
+<select id="list" resultType="com.qiyachao.movie.domain.Movie"> 
+
+	select * from t_movie 
+	<where>
+	<if test="name != null and name != ''">
+	name like "%"#{name}"%"
+	</if>
+	<if test="year != null and year !=''"> 
+	and year =#{year}
+	</if>
+	<if test="startprice != null and startprice !=''">
+	and price >=#{startprice}
+	</if>
+	<if test="endtprice != null and endtprice !=''">
+	and price &lt;=#{endtprice}
+	</if>
+	<if test="startlongtime != null and startlongtime != ''">
+	and longtime >=#{startlongtime}
+	</if>
+	<if test="startDate != null and startDate != ''">
+	and uptime >=#{startDate}
+	</if>
+	<if test="endDate != null and endDate != ''">
+	and uptime &lt;=#{endDate}
+	</if>
+	</where>
+	<if test="orderFiled != null and orderFiled !=''">
+	 order by ${orderFiled} ${orderMethod}
+	</if>
+</select> 
+</mapper>
